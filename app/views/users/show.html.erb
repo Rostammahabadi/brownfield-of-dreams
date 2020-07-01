@@ -17,7 +17,16 @@
   <section id='github-repos'>
     <% @users_repos.each do |repo| %>
       <ul class="user-repo">
-        <li class="repo-name">Name: <%= link_to repo.name, repo.url %></li>
+        <li class="repo-name"><%= link_to repo.name, repo.url %></li>
+      </ul>
+    <% end %>
+  </section>
+
+  <section id='github-followers'>
+    <h3>Followers</h3>
+    <% @users_followers.each do |follower| %>
+      <ul class="user-followers">
+        <li class="follower-name"><%= link_to follower.name, follower.url %></li>
       </ul>
     <% end %>
   </section>
