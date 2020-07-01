@@ -1,4 +1,5 @@
 class GithubDecorator
+
   def initialize(user)
     @user = user
     create_github_service
@@ -15,8 +16,18 @@ class GithubDecorator
         {
           name: repo[:name],
           html_url: repo[:html_url]
-        }
-      )
+        })
+    end
+  end
+
+  def list_followers
+    followers = @github_service.user_followers
+    followers.map do |follower|
+      UserFollower.new(
+        {
+          handle: follower[:login],
+          url: follower[:html_url]
+        })
     end
   end
 end
