@@ -1,4 +1,5 @@
 class GithubService
+
   attr_reader :user
 
   def initialize(user)
@@ -7,6 +8,10 @@ class GithubService
 
   def user_repos
     get_json('user/repos')
+  end
+
+  def user_followers
+    get_json('user/followers')
   end
 
   private
