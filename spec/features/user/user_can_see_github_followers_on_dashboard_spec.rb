@@ -26,7 +26,7 @@ describe 'As a registered user' do
     end
 
     it 'I dont see a followers section if I dont have an access token' do
-      user create(:user)
+      user = create(:user)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
