@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
     github_decorator = GithubDecorator.new(current_user)
     @users_repos = github_decorator.list_five_repos
+    @users_followers = github_decorator.list_followers
   end
 
   def new
