@@ -26,7 +26,7 @@
     <h3>Followers</h3>
     <% @users_followers.each do |follower| %>
       <ul class="user-followers">
-        <li class="follower-name"><%= link_to follower.name, follower.url %></li>
+        <li class="follower-handle"><%= link_to follower.handle, follower.url %></li>
       </ul>
     <% end %>
   </section>
