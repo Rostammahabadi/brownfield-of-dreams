@@ -23,11 +23,23 @@ class GithubDecorator
   def list_followers
     followers = @github_service.user_followers
     followers.map do |follower|
-      UserFollower.new(
+      GithubRelations.new(
         {
           handle: follower[:login],
           url: follower[:html_url]
         })
+    end
+  end
+
+  def list_followed_users
+    followed_users = @github_service.user_following
+    followed_users.map do |followed_user|
+      GithubRelations.new(
+        {
+          handle: followed_user[:login],
+          url: followed_user[:html_url]
+        }
+      )
     end
   end
 end
