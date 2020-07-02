@@ -1,5 +1,4 @@
 class GithubDecorator
-
   def initialize(user)
     @user = user
     create_github_service
@@ -16,7 +15,8 @@ class GithubDecorator
         {
           name: repo[:name],
           html_url: repo[:html_url]
-        })
+        }
+      )
     end
   end
 
@@ -27,7 +27,8 @@ class GithubDecorator
         {
           handle: follower[:login],
           url: follower[:html_url]
-        })
+        }
+      )
     end
   end
 
