@@ -39,4 +39,14 @@ RSpec.describe User, type: :model do
       expect(User.check_for_username?("George")). to eq(false)
     end
   end
+
+  describe 'Instance Methods' do
+    it '#activated?' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+      user2 = User.create(email: 'user2@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller', status: "Active")
+
+      expect(user1.activated?).to eq(false)
+      expect(user2.activated?).to eq(true)
+    end
+  end
 end

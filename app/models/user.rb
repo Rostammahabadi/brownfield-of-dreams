@@ -17,4 +17,10 @@ class User < ApplicationRecord
 
     true
   end
+
+  def activated?
+    return false if self.status != "Active"
+
+    true
+  end
 end
