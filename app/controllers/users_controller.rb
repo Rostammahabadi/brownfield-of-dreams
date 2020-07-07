@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def send_email(user)
-    recipient = params[:email]
+    recipient = params[:user][:email]
     email_info =  {
                     user: user,
                     message: "Visit here to activate your account."
