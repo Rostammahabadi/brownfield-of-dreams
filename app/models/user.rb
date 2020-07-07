@@ -25,6 +25,6 @@ class User < ApplicationRecord
   end
 
   def activate
-    self.status = "Active"
+    update(status: "Active")
   end
 end
