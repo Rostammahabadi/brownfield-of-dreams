@@ -48,5 +48,15 @@ RSpec.describe User, type: :model do
       expect(user1.activated?).to eq(false)
       expect(user2.activated?).to eq(true)
     end
+
+    it '#activate' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+
+      expect(user1.activated?).to eq(false)
+
+      user1.activate
+
+      expect(user1.activated?).to eq(true)
+    end
   end
 end
