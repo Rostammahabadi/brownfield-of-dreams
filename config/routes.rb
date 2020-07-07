@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :update, :edit] do
     post '/friendships', to: 'friendships#create'
+    get '/activate', to: 'activation#show' 
   end
 
   resources :tutorials, only: [:show, :index] do
