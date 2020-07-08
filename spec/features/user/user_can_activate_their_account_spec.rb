@@ -32,7 +32,7 @@ describe 'As a non-activated user' do
     email_count = ActionMailer::Base.deliveries.count
 
     click_on'Create Account'
-    binding.pry
+
     expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
   end
 
