@@ -11,6 +11,6 @@ RSpec.describe RegistrationMailer, type: :mailer do
     email = RegistrationMailer.inform(email_info, recipient)
     expect(email.to).to eq([recipient])
     expect(email.body.encoded).to match("Visit here to activate your account.")
-    expect(email.body.encoded).to match("http://localhost:3000/users/#{user.id}/activate")
+    expect(email.body.encoded).to match("https://hidden-brook-14849.herokuapp.com/users/#{user.id}/activate")
   end
 end
