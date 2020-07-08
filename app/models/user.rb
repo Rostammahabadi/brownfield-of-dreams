@@ -27,4 +27,8 @@ class User < ApplicationRecord
   def activate
     update(status: "Active")
   end
+
+  def bookmarked_videos
+    videos.order('position').group_by(&:tutorial)
+  end
 end
