@@ -11,7 +11,6 @@ class InviteController < ApplicationController
       redirect_to "/invite"
     else
       InviteNotifierMailer.invite(user_hash, user).deliver_now
-      binding.pry
       flash[:notice] = "Successfully sent invite!"
       redirect_to dashboard_path
     end
