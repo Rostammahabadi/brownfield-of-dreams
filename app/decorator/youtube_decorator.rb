@@ -1,10 +1,10 @@
 class YoutubeDecorator
   def initialize(tutorial)
     @tutorial = tutorial
-    create_youtube_service
+    youtube_service
   end
 
-  def create_youtube_service
+  def youtube_service
     @youtube_service ||= YoutubeService.new
   end
 
