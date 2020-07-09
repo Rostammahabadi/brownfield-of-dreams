@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get'/auth/github/callback', to: 'github_sessions#create'
+  get '/auth/:provider/callback', to: 'sessions#create'
   get '/invite', to: 'invite#show'
   post '/invite', to: 'invite#create'
   root 'welcome#index'
