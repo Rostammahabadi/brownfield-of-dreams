@@ -32,7 +32,7 @@ class User < ApplicationRecord
     videos.order('position').group_by(&:tutorial)
   end
 
-  def is_friend?(username)
+  def friend?(username)
     return false if friends.find_by(username: username).nil?
 
     true
