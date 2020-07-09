@@ -18,6 +18,16 @@ class User < ApplicationRecord
     true
   end
 
+  def activated?
+    return false if status != "Active"
+
+    true
+  end
+
+  def activate
+    update(status: "Active")
+  end
+
   def bookmarked_videos
     videos.order('position').group_by(&:tutorial)
   end

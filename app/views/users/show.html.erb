@@ -1,7 +1,8 @@
 <section class="dashboard-main">
   <h1> <%= current_user.first_name %>'s Dashboard </h1>
-
+  <h5> Status: <%= current_user.status if current_user.activated? %>
   <%= button_to 'Log Out', logout_path, method: 'delete', class: "btn btn-primary mb1 bg-teal" %>
+  <%= link_to 'Send an Invite', '/invite' %>
   <% if current_user[:username].nil? %>
     <%= link_to 'Connect to Github', "/auth/github",class: "badge badge-pill badge-primary" %>
   <% end %>

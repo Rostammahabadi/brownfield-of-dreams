@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   end
 
   get '/auth/:provider/callback', to: 'sessions#create'
-
+  get '/invite', to: 'invite#show'
+  post '/invite', to: 'invite#create'
   root 'welcome#index'
   get 'tags/:tag', to: 'welcome#index', as: :tag
   get '/register', to: 'users#new'
@@ -40,6 +41,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :update, :edit] do
     post '/friendships', to: 'friendships#create'
+    get '/activate', to: 'activation#show'
   end
 
   resources :tutorials, only: [:show, :index] do
