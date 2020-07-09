@@ -4,16 +4,13 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def create
-    if check_thumbnail(params[:tutorial][:thumbnail])
-      return
-    else
+    return if check_thumbnail(params[:tutorial][:thumbnail])
     tutorial = Tutorial.create(playlist_params)
     if params[:tutorial][:playlist_id]
       non_valid_playlist if create_playlist(params, tutorial).nil?
     else
       redirect_to "/tutorials/#{tutorial.id}?id=#{tutorial.id}"
     end
-  end
   end
 
   def new
@@ -57,11 +54,9 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def check_thumbnail(params)
-    if /.(jpg|gif|png)/.match(params)
-      return
-    else
-      flash[:error] = "Not a valid thumbnail"
-      redirect_to new_admin_tutorial_path
-    end
+    return false if /.(jpg|gif|png)/.match(params)
+
+    flash[:error] = "Not a valid thumbnail"
+    redirect_to new_admin_tutorial_path
   end
 end
