@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.create(user_params)
+    user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
       flash[:notice1] = "Logged in as #{user.first_name} #{user.last_name}"
@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def send_email(user)
-    recipient = params[:email]
+    recipient = params[:user][:email]
     email_info =  {
                     user: user,
                     message: "Visit here to activate your account."

@@ -40,7 +40,29 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'Instance Methods' do 
+  describe 'Instance Methods' do
+    it '#activated?' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+      user2 = User.create(email: 'user2@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller', status: "Active")
+
+      expect(user1.activated?).to eq(false)
+      expect(user2.activated?).to eq(true)
+    end
+
+    it '#activate' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+
+      expect(user1.activated?).to eq(false)
+      expect(user1.status).to eq("Inactive")
+
+      user1.activate
+
+      expect(user1.activated?).to eq(true)
+      expect(user1.status).to eq("Active")
+    end
+  end
+  
+  describe 'Instance Methods' do
     it '.bookmarked_videos' do
       tutorial1 = create(:tutorial, title: "How to Tie Your Shoes")
       tutorial2 = create(:tutorial, title: "How to Cook a Steak")
@@ -67,6 +89,16 @@ RSpec.describe User, type: :model do
       }
 
       expect(user.bookmarked_videos).to eq(expected_return)
+    end
+
+    it '#is_friend?' do
+      user1 = create(:user, token:  ENV["GITHUB_API_TOKEN_R"])
+      user2 = create(:user, token:  ENV["GITHUB_API_TOKEN"], username: 'takeller')
+      user3 = create(:user)
+      Friendship.create({user_id: user1.id, friend_id: user2.id})
+
+      expect(user1.is_friend?('takeller')).to eq(true)
+      expect(user3.is_friend?('takeller')).to eq(false)
     end
   end
 end
