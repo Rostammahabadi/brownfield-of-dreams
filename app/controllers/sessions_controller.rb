@@ -4,24 +4,28 @@ class SessionsController < ApplicationController
   end
 
   def create
-    if current_user
-      auth = request.env['omniauth.auth']
-      User.create_with_omniauth(auth)
+    return omniauth_session if current_user
+
+    user = User.find_by(email: params[:session][:email])
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
       redirect_to dashboard_path
     else
-      user = User.find_by(email: params[:session][:email])
-      if user && user.authenticate(params[:session][:password])
-        session[:user_id] = user.id
-        redirect_to dashboard_path
-      else
-        flash[:error] = 'Looks like your email or password is invalid'
-        render :new
-      end
+      flash[:error] = 'Looks like your email or password is invalid'
+      render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
     redirect_to root_path
+  end
+
+  private
+
+  def omniauth_session
+    auth = request.env['omniauth.auth']
+    User.create_with_omniauth(auth)
+    redirect_to dashboard_path
   end
 end

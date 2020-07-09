@@ -8,7 +8,7 @@ class User < ApplicationRecord
   enum role: { default: 0, admin: 1 }
   has_secure_password
 
-  has_many :friendships
+  has_many :friendships, dependent: :destroy
   has_many :friends, through: :friendships
 
   def self.check_for_username?(username)

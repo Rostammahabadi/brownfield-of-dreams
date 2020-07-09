@@ -54,7 +54,7 @@ class Admin::TutorialsController < Admin::BaseController
     flash[:error] = 'Not a valid Playlist ID'
     redirect_to new_admin_playlist_path
   end
-  
+
   def invalid_thumbnail(params)
     return false if /.(jpg|gif|png)/.match(params)
 

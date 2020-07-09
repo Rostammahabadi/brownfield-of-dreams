@@ -1,11 +1,11 @@
 class GithubDecorator
   def initialize(user)
     @user = user
-    create_github_service
+    github_service
   end
 
-  def create_github_service
-    @github_service = GithubService.new(@user)
+  def github_service
+    @github_service ||= GithubService.new(@user)
   end
 
   def get_user_email(username)
