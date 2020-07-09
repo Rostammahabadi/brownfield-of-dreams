@@ -10,7 +10,7 @@ class GithubDecorator
 
   def get_user_email(username)
     user_info = @github_service.user_email(username)
-    {name: user_info[:name], email: user_info[:email]}
+    { name: user_info[:name], email: user_info[:email] }
   end
 
   def list_five_repos

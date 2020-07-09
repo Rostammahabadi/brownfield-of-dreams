@@ -17,6 +17,7 @@ class YoutubeDecorator
     videos_info = []
     playlist_items = @youtube_service.playlist_items(playlist_id)
     return if playlist_items[:error]
+
     videos_info = parse_page(playlist_items, videos_info)
     videos_info = multi_page_playlist(playlist_items, videos_info, playlist_id) if playlist_items[:nextPageToken]
     videos_info

@@ -4,7 +4,8 @@ class Admin::TutorialsController < Admin::BaseController
   end
 
   def create
-    return if check_thumbnail(params[:tutorial][:thumbnail])
+    return if invalid_thumbnail(params[:tutorial][:thumbnail])
+
     tutorial = Tutorial.create(playlist_params)
     if params[:tutorial][:playlist_id]
       non_valid_playlist if create_playlist(params, tutorial).nil?
@@ -42,6 +43,7 @@ class Admin::TutorialsController < Admin::BaseController
   def create_playlist(params, tutorial)
     youtube_decorator = YoutubeDecorator.new(tutorial)
     return if youtube_decorator.playlist_videos(params[:tutorial][:playlist_id]).nil?
+
     flash[:notice] = "Successfully created tutorial.
                      #{view_context.link_to('View it here.', tutorial_path(tutorial.id))}."
 
@@ -52,11 +54,11 @@ class Admin::TutorialsController < Admin::BaseController
     flash[:error] = 'Not a valid Playlist ID'
     redirect_to new_admin_playlist_path
   end
-
-  def check_thumbnail(params)
+  
+  def invalid_thumbnail(params)
     return false if /.(jpg|gif|png)/.match(params)
 
-    flash[:error] = "Not a valid thumbnail"
+    flash[:error] = 'Not a valid thumbnail'
     redirect_to new_admin_tutorial_path
   end
 end
