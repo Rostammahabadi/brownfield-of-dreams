@@ -23,7 +23,7 @@ describe 'Visitor' do
       end
     end
 
-    it "doesn't show videos which are marked as classroom" do
+    xit "doesn't show videos which are marked as classroom" do
       tutorial1 = create(:tutorial)
       tutorial2 = create(:tutorial, :classroom => true)
 
