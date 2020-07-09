@@ -16,8 +16,7 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     if user.save
       session[:user_id] = user.id
-      flash[:notice1] = "Logged in as #{user.first_name} #{user.last_name}"
-      flash[:notice2] = 'This account has not yet been activated. Please check your email.'
+      send_flash_messages(user)
       send_email(user)
       redirect_to dashboard_path
     else
@@ -36,5 +35,10 @@ class UsersController < ApplicationController
     recipient = params[:user][:email]
     email_info = { user: user, message: 'Visit here to activate your account.' }
     RegistrationMailer.inform(email_info, recipient).deliver_now
+  end
+
+  def send_flash_messages(user)
+    flash[:notice1] = "Logged in as #{user.first_name} #{user.last_name}"
+    flash[:notice2] = 'This account has not yet been activated. Please check your email.'
   end
 end
