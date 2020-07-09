@@ -36,7 +36,15 @@ describe 'As a non-activated user' do
     expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
   end
 
-  it 'Clicking the link in the email will activate my account' do
+  it 'I can activate my account' do
+    click_on'Create Account'
 
+    user = User.last
+
+    expect(user.status).to eq("Inactive")
+
+    visit "/users/#{user.id}/activate"
+
+    expect(user.reload.status).to eq("Active")
   end
 end
