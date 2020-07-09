@@ -48,11 +48,10 @@ describe 'As a user' do
 
       click_on 'Send an Invite'
 
-      fill_in :github_handle, with: "takeller"
+      fill_in :github_handle, with: "melatran"
       click_on 'Send Invite'
 
       expect(page).to have_content("The Github user you selected doesn't have an email address associated with their account.")
-
     end
   end
 end
