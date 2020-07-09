@@ -72,7 +72,7 @@ RSpec.describe User, type: :model do
       expect(user1.status).to eq("Active")
     end
   end
-  
+
   describe 'Instance Methods' do
     it '.bookmarked_videos' do
       tutorial1 = create(:tutorial, title: "How to Tie Your Shoes")
@@ -102,14 +102,14 @@ RSpec.describe User, type: :model do
       expect(user.bookmarked_videos).to eq(expected_return)
     end
 
-    it '#is_friend?' do
+    it '#friend?' do
       user1 = create(:user, token:  ENV["GITHUB_API_TOKEN_R"])
       user2 = create(:user, token:  ENV["GITHUB_API_TOKEN"], username: 'takeller')
       user3 = create(:user)
       Friendship.create({user_id: user1.id, friend_id: user2.id})
 
-      expect(user1.is_friend?('takeller')).to eq(true)
-      expect(user3.is_friend?('takeller')).to eq(false)
+      expect(user1.friend?('takeller')).to eq(true)
+      expect(user3.friend?('takeller')).to eq(false)
     end
   end
 end

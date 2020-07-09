@@ -19,20 +19,20 @@ class User < ApplicationRecord
   end
 
   def activated?
-    return false if status != "Active"
+    return false if status != 'Active'
 
     true
   end
 
   def activate
-    update(status: "Active")
+    update(status: 'Active')
   end
 
   def bookmarked_videos
     videos.order('position').group_by(&:tutorial)
   end
 
-  def is_friend?(username)
+  def friend?(username)
     return false if friends.find_by(username: username).nil?
 
     true
