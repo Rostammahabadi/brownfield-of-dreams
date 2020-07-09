@@ -5,7 +5,7 @@ class YoutubeDecorator
   end
 
   def create_youtube_service
-    @youtube_service = YoutubeService.new
+    @youtube_service ||= YoutubeService.new
   end
 
   def playlist_videos(playlist_id)

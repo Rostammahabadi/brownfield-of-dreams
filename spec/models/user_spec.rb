@@ -41,7 +41,29 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Instance Methods' do
-    it '#bookmarked_videos' do
+    it '#activated?' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+      user2 = User.create(email: 'user2@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller', status: "Active")
+
+      expect(user1.activated?).to eq(false)
+      expect(user2.activated?).to eq(true)
+    end
+
+    it '#activate' do
+      user1 = User.create(email: 'user1@email.com', password: 'password', first_name:'Jim', role: 0, username: 'takeller')
+
+      expect(user1.activated?).to eq(false)
+      expect(user1.status).to eq("Inactive")
+
+      user1.activate
+
+      expect(user1.activated?).to eq(true)
+      expect(user1.status).to eq("Active")
+    end
+  end
+  
+  describe 'Instance Methods' do
+    it '.bookmarked_videos' do
       tutorial1 = create(:tutorial, title: "How to Tie Your Shoes")
       tutorial2 = create(:tutorial, title: "How to Cook a Steak")
       video1 = create(:video, title: "The Bunny Ears Technique", tutorial: tutorial1)
