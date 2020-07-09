@@ -90,5 +90,15 @@ RSpec.describe User, type: :model do
 
       expect(user.bookmarked_videos).to eq(expected_return)
     end
+
+    it '#is_friend?' do
+      user1 = create(:user, token:  ENV["GITHUB_API_TOKEN_R"])
+      user2 = create(:user, token:  ENV["GITHUB_API_TOKEN"], username: 'takeller')
+      user3 = create(:user)
+      Friendship.create({user_id: user1.id, friend_id: user2.id})
+
+      expect(user1.is_friend?('takeller')).to eq(true)
+      expect(user3.is_friend?('takeller')).to eq(false)
+    end
   end
 end
