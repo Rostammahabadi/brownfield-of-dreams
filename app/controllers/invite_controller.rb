@@ -8,10 +8,10 @@ class InviteController < ApplicationController
     user_hash = GithubDecorator.new(current_user).get_user_email(params[:github_handle])
     if user_hash[:email].nil?
       flash[:error] = "The Github user you selected doesn't have an email address associated with their account."
-      redirect_to "/invite"
+      redirect_to '/invite'
     else
       InviteNotifierMailer.invite(user_hash, user).deliver_now
-      flash[:notice] = "Successfully sent invite!"
+      flash[:notice] = 'Successfully sent invite!'
       redirect_to dashboard_path
     end
   end

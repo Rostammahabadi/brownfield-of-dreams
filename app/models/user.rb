@@ -19,13 +19,13 @@ class User < ApplicationRecord
   end
 
   def activated?
-    return false if status != "Active"
+    return false if status != 'Active'
 
     true
   end
 
   def activate
-    update(status: "Active")
+    update(status: 'Active')
   end
 
   def bookmarked_videos

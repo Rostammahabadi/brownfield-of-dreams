@@ -5,11 +5,11 @@ class Tutorial < ApplicationRecord
 
   def self.tagged_tutorials(params)
     if params[:tag]
-       Tutorial.tagged_with(params[:tag])
-               .paginate(page: params[:page], per_page: 5)
-     else
-       Tutorial.all.paginate(page: params[:page], per_page: 5)
-     end
+      Tutorial.tagged_with(params[:tag])
+              .paginate(page: params[:page], per_page: 5)
+    else
+      Tutorial.all.paginate(page: params[:page], per_page: 5)
+    end
   end
 
   def self.filter_tutorials(params, user)
@@ -21,7 +21,7 @@ class Tutorial < ApplicationRecord
     if user
       tutorials
     else
-      tutorials.where("classroom = false")
+      tutorials.where('classroom = false')
     end
   end
 end
