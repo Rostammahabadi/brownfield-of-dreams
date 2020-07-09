@@ -1,15 +1,6 @@
 require 'rails_helper'
 
 describe "As a user" do
-  # before :each do
-  #   user = create(:user)
-  #   allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
-  #   OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new({
-  #     :provider => 'github',
-  #     :info => {:email => 'RostamMahabadi@gmail.com', :nickname => "Rostammahabadi", :uid => "60719241", :token => "123412341234"},
-  #     :credentials => {:token => ENV['GITHUB_API_TOKEN_R']}
-  #   })
-  # end
   it "shows a link to connect to github on dashboard" do
     user = create(:user)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
