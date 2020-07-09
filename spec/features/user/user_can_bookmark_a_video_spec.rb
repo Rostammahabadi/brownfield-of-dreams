@@ -32,3 +32,17 @@ describe 'A registered user' do
     expect(page).to have_content("Already in your bookmarks")
   end
 end
+
+describe 'As a visitor' do
+  it 'When I try to bookmark a video, I get a message saying I must login' do
+    tutorial= create(:tutorial)
+    video = create(:video, tutorial_id: tutorial.id)
+
+    visit tutorial_path(tutorial)
+
+    click_on 'Bookmark'
+
+    expect(current_path).to eq(tutorial_path(tutorial))
+    expect(page).to have_content('User must login to bookmark videos. Login?')
+  end
+end
